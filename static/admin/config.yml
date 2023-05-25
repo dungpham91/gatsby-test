@@ -1,5 +1,5 @@
 backend:
-    name: git-gateway
+    name: github
     repo: dungpham91/gatsby-test
     branch: main
     base_url: http://localhost
@@ -10,33 +10,19 @@ backend:
         uploadMedia: "Upload “{{path}}”"
         deleteMedia: "Delete “{{path}}”"
 
-media_folder: /static/media/uploads
-public_folder: /media/uploads
+media_folder: "static/img"
+public_folder: "/img"
 
 collections:
-  - label: "Posts"
-    label_singular: "Post"
-    name: posts
-    folder: posts
-    media_folder: "/static/media/blog"
-    public_folder: "../../../static/media/blog" # relative path from markdown file location
-    slug: "{{fields.slug}}"
-    path: "{{year}}/{{month}}/{{slug}}"
+  - name: "article"
+    label: "Article"
+    folder: "content/blog"
     create: true
-    view_filters:
-        - label: Drafts
-          field: draft
-          pattern: true
+    slug: "{{slug}}"
+    editor:
+      preview: false
     fields:
-        - {label: "Template Key", name: templateKey, widget: "hidden", default: "blog-post"}
-        - {label: "Slug", name: slug, widget: "string",
-           pattern: ["^[a-z0-9]+(?:-[a-z0-9]+)*$",
-                     "A slug can have no spaces or special characters"]
-          }
-        - {label: "Cover Image", name: cover, widget: "image"}
-        - {label: "Title", name: title}
-        - {label: "Publish Date", name: date, widget: "datetime"}
-        - {label: "Description", name: description, widget: "text"}
-        - {label: "Draft", name: draft, widget: "boolean", default: false}
-        - {label: "Tags", name: tags, widget: "list" }
-        - {label: "Body", name: body, widget: "markdown"}
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Description", name: "description", widget: "string" }
+      - { label: "Body", name: "body", widget: "markdown" }
